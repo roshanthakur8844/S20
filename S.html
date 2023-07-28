@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #ffcccc;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+
+        .love-form input[type="text"],
+        .login-form input[type="password"],
+        .login-form input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .love-form input[type="submit"],
+        .login-form input[type="submit"] {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .love-form input[type="submit"]:hover,
+        .login-form input[type="submit"]:hover {
+            background-color: #ff6666;
+        }
+
+        .love-result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .love-container,
+        .login-container {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* Love animation */
+        @keyframes heartPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .love-container {
+            animation: heartPulse 2s infinite;
+        }
+
+        .container.show {
+            animation: heartPulse 2s infinite;
+        }
+
+        /* Heart trail animation */
+        @keyframes heartTrail {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+
+        .love-result .heart {
+            display: inline-block;
+            font-size: 18px;
+            color: #ff4d4d;
+            animation: heartTrail 1s linear;
+        }
+
+        /* Full-screen love animation */
+        @keyframes loveBackground {
+            0% {
+                background-position: 0% 0%, 100% 100%;
+            }
+            25% {
+                background-position: 100% 0%, 0% 100%;
+            }
+            50% {
+                background-position: 100% 100%, 0% 0%;
+            }
+            75% {
+                background-position: 0% 100%, 100% 0%;
+            }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(45deg, #ff4d4d, #ffc0cb);
+            background-size: 200% 200%;
+            animation: loveBackground 8s linear infinite;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-container show">
+        <h1>Login</h1>
+        <form class="login-form" id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div class="container love-container">
+        <h1>Love Calculator</h1>
+        <form class="love-form" id="loveForm">
+            <input type="text" id="name1" placeholder="Your Name" required>
+            <input type="text" id="name2" placeholder="Partner's Name" required>
+            <input type="submit" value="Calculate Love">
+        </form>
+        <div class="love-result" id="loveResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Dummy login credentials (username: "sakshi", password: "20")
+            if (username === "sakshi" && password === "20") {
+                document.querySelector('.login-container').classList.remove('show');
+                document.querySelector('.love-container').classList.add('show');
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        });
+
+        document.getElementById('loveForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name1 = document.getElementById('name1').value;
+            const name2 = document.getElementById('name2').value;
+
+            // Dummy calculation for demonstration purposes
+            const lovePercentage = Math.floor(Math.random() * 101);
+
+            const resultElement = document.getElementById('loveResult');
+            resultElement.innerHTML = `Your love percentage with ${name2} is ${lovePercentage}%!`;
+
+                        // Add heart trail animation
+            const heartTrail = document.createElement('span');
+            heartTrail.classList.add('heart');
+            heartTrail.innerText = '❤';
+            resultElement.appendChild(heartTrail);
+        });
+    </script>
+</body>
+</html>
+
+            
